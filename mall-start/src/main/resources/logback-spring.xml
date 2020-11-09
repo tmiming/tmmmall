@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource ="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <property name="APP_NAME" value="mall"/>
+    <property name="LOG_PATH" value="${user.home}/${APP_NAME}/logs/" />
+<!--
+    <property name="LOG_FILE" value="${LOG_PATH}/application.log" />
+-->
+    <property name="MALL_MAIN_FILE" value="${LOG_PATH}/mall-main.log"/>
+    <appender name="MALL_MAIN_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MALL_MAIN_FILE}</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${MALL_MAIN_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <property name="BIZ_ERROR_LOG_FILE" value="${LOG_PATH}/mall-biz-error.log"/>
+    <appender name="BIZ_ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${BIZ_ERROR_LOG_FILE}</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${BIZ_ERROR_LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <property name="CHECK_ERROR_LOG_FILE" value="${LOG_PATH}/mall-check-error.log"/>
+    <appender name="CHECK_ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${CHECK_ERROR_LOG_FILE}</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${CHECK_ERROR_LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <property name="SERVICE_ERROR_LOG_FILE" value="${LOG_PATH}/mall-service-error.log"/>
+    <appender name="SERVICE_ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${SERVICE_ERROR_LOG_FILE}</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${SERVICE_ERROR_LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+
+    <property name="SERVICE_LOG_FILE" value="${LOG_PATH}/mall-service.log"/>
+    <appender name="SERVICE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${SERVICE_LOG_FILE}</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${SERVICE_LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+
+    <property name="SYSTEM_ERROR_LOG_FILE" value="${LOG_PATH}/mall-system-error.log"/>
+    <appender name="SYSTEM_ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${SYSTEM_ERROR_LOG_FILE}</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${SYSTEM_ERROR_LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <maxFileSize>50MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.tmm.mall.support.exception.CheckException" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="CHECK_ERROR_LOG"/>
+    </logger>
+
+    <logger name="com.tmm.mall.support.exception.SystemException" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="SYSTEM_ERROR_LOG"/>
+    </logger>
+
+    <logger name="com.tmm.mall.support.exception.ServiceException" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="SERVICE_ERROR_LOG"/>
+    </logger>
+
+    <logger name="com.tmm.mall.support.exception.BizException" additivity="false">
+        <level value="ERROR"/>
+        <appender-ref ref="BIZ_ERROR_LOG"/>
+    </logger>
+
+    <logger name="com.tmm.mall.support.logger.ServiceLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="SERVICE_LOG"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="SERVICE_LOG"/>
+    </root>
+
+</configuration>
